@@ -105,6 +105,7 @@ class _MoviesDetailsState extends State<MoviesDetails> {
             ),
             SizedBox(width: 10.0,),
             Container(
+
               height: 100.0,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,14 +127,17 @@ class _MoviesDetailsState extends State<MoviesDetails> {
                     ),),
                   SizedBox(height: 2.0),
                   Text(repl,
+
                     style: TextStyle(
                       fontSize: 11.0,
                       fontWeight: FontWeight.w600,
                       color: Colors.black,
+                    ),
 
-                    ),),
+                  ),
                   SizedBox(height: 20.0),
                   Text(MoviesData['results'][index]['release_date'],
+
                     style: TextStyle(
                       fontSize: 8.0,
                       fontWeight: FontWeight.bold,

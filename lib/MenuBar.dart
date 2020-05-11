@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './Movies.dart';
 import './Quiz.dart';
 import './Camera.dart';
+import './CoronaStats.dart';
 
 
 import './Accueil.dart';
@@ -40,7 +41,7 @@ class MenuBar extends StatelessWidget {
           IconButton(icon: Icon(Icons.collections,color: Colors.white,), onPressed: (){
             Navigator.of(context).pop();
             Navigator.push(context,MaterialPageRoute(
-                builder: (context)=>Accueil()));
+                builder: (context)=>CoronaStats()));
           }),
           IconButton(icon: Icon(Icons.ac_unit,color: Colors.white,), onPressed: (){
             Navigator.of(context).pop();
