@@ -5,13 +5,23 @@ import './Register.dart';
 void main(){
   runApp(MaterialApp(home:MyHomePage(),));
 }
-class MyHomePage extends StatelessWidget{
+class MyHomePage extends StatefulWidget{
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  String email ='';
+  String password='';
+  final _final = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return  Scaffold(
+     
         resizeToAvoidBottomPadding: false,
         body: Column(
+          
           children: <Widget>[
             Container(
               child: Stack(
@@ -46,10 +56,15 @@ class MyHomePage extends StatelessWidget{
             ),
             Container(
               padding: EdgeInsets.only(left: 20.0, top: 35.0, right: 20.0),
+              child:Form(
+                key: _final,
               child: Column(
+
                 children: <Widget>[
-                  TextField(
+                  TextFormField(
+                    validator:(val)=>(val.isEmpty || val !='goutaibabderrafii@gmail.com') ? 'Enter or check your email' : null,
                     decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.person),
                         labelText: 'EMAIL',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
@@ -57,12 +72,19 @@ class MyHomePage extends StatelessWidget{
                             color: Colors.grey),
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.lightBlue))),
+                            onChanged: (val){
+                      setState(() {
+                        email=val;
+                      });
+                            },
                   ),
                   SizedBox(
                     height: 20.0,
                   ),
-                  TextField(
+                  TextFormField(
+                    validator:(val)=>(val.isEmpty || val!='azerty10')? 'Enter or check your Password' : null,
                     decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.lock),
                         labelText: 'PASSWORD',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
@@ -70,6 +92,11 @@ class MyHomePage extends StatelessWidget{
                             color: Colors.grey),
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.lightBlue))),
+                    onChanged: (val){
+                      setState(() {
+                        password=val;
+                      });
+                  },
                     obscureText: true,
                   ),
                   SizedBox(
@@ -99,10 +126,12 @@ class MyHomePage extends StatelessWidget{
                       elevation: 7.0,
                       child: (GestureDetector(
                         onTap: () {
-
-                          Navigator.of(context).pop();
-                          Navigator.push(context,MaterialPageRoute(
-                              builder: (context)=>Accueil()));
+                          setState(() {
+                            if(_final.currentState.validate()) {
+                              Navigator.of(context).pop();
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => Accueil()));
+                            } });
                         },
                         child: Center(
                           child: (Text(
@@ -151,7 +180,7 @@ class MyHomePage extends StatelessWidget{
                     ),
                   )
                 ],
-              ),
+              ),)
             ),
             SizedBox(
               height: 15.0,
@@ -179,9 +208,8 @@ class MyHomePage extends StatelessWidget{
               ],
             ),
           ],
-        )
+        ),
     );
 
   }
-
 }

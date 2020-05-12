@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "510446623711",
+    "firebase_url": "https://shuffle-931a7.firebaseio.com",
+    "project_id": "shuffle-931a7",
+    "storage_bucket": "shuffle-931a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510446623711:android:b95f3b31d4869c3cee826a",
+        "android_client_info": {
+          "package_name": "com.example.shuffle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "510446623711-pko20kqh36umg5hb67q7ipk5ji1o2e5l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcm03kWuKqlKig6o6SmGhUyZjGlz0MgWM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "510446623711-pko20kqh36umg5hb67q7ipk5ji1o2e5l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

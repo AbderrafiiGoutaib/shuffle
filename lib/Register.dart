@@ -2,12 +2,22 @@ import 'package:flutter/material.dart';
 import './Accueil.dart';
 import './main.dart';
 
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
   @override
+  _RegisterState createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+  @override
+  String email;
+  String password;
+  String repassword;
+  final _finalkey = GlobalKey<FormState>();
   Widget build(BuildContext context) {
     // TODO: implement build
 
     return Scaffold(
+      
         resizeToAvoidBottomPadding: false,
         body: Column(
           children: <Widget>[
@@ -46,22 +56,33 @@ class Register extends StatelessWidget {
             ),
             Container(
               padding: EdgeInsets.only(left: 20.0, top: 35.0, right: 20.0),
+              child:Form(
+                key: _finalkey,
               child: Column(
                 children: <Widget>[
-                  TextField(
+                  TextFormField(
+                    validator: (val)=>val.isEmpty?'enter your email':null,
                     decoration: InputDecoration(
                         labelText: 'EMAIL',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.bold,
                             color: Colors.grey),
+
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.lightBlue))),
+                    onChanged: (val){
+                      setState(() {
+                        email=val;
+                      });
+                    } ,
                   ),
+
                   SizedBox(
                     height: 20.0,
                   ),
-                  TextField(
+                  TextFormField(
+                    validator: (val)=>val.isEmpty?'enter your email':null,
                     decoration: InputDecoration(
                         labelText: 'PASSWORD',
                         labelStyle: TextStyle(
@@ -70,12 +91,18 @@ class Register extends StatelessWidget {
                             color: Colors.grey),
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.lightBlue))),
+                    onChanged: (val){
+                      setState(() {
+                        password=val;
+                      });
+                    },
                     obscureText: true,
                   ),
                   SizedBox(
                     height: 20.0,
                   ),
-                  TextField(
+                  TextFormField(
+                     validator: (val)=>val.isEmpty || val==password?'perhaps your password not matched or empty':null,
                     decoration: InputDecoration(
                         labelText: 'RETYPING YOUR PASSWORD',
                         labelStyle: TextStyle(
@@ -84,7 +111,14 @@ class Register extends StatelessWidget {
                             color: Colors.grey),
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.lightBlue))),
+                    onChanged: (val){
+                      setState(() {
+                        password=val;
+                      });
+                    },
+                    
                     obscureText: true,
+                    
                   ),
                   SizedBox(height: 40.0),
                   Container(
@@ -96,9 +130,14 @@ class Register extends StatelessWidget {
                       elevation: 7.0,
                       child: (GestureDetector(
                         onTap: () {
-                          Navigator.of(context).pop();
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Accueil()));
+                          setState(() {
+                            if(_finalkey.currentState.validate()){
+                              Navigator.of(context).pop();
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => Accueil()));
+                            }
+                          });
+                        
                         },
                         child: Center(
                           child: (Text(
@@ -169,7 +208,7 @@ class Register extends StatelessWidget {
 //                    ),
 //                  )
                 ],
-              ),
+              ),)
 
             ),
 
