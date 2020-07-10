@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:shuffle/Authenticate.dart';
+import 'package:shuffle/services/auth.dart';
 import './Accueil.dart';
 import './main.dart';
 
 class Register extends StatefulWidget {
   @override
   _RegisterState createState() => _RegisterState();
+  final Function toggleView;
+  Register({ this.toggleView });
 }
 
 class _RegisterState extends State<Register> {
@@ -13,6 +17,7 @@ class _RegisterState extends State<Register> {
   String password;
   String repassword;
   final _finalkey = GlobalKey<FormState>();
+  final Auth _auth = Auth();
   Widget build(BuildContext context) {
     // TODO: implement build
 
@@ -102,7 +107,7 @@ class _RegisterState extends State<Register> {
                     height: 20.0,
                   ),
                   TextFormField(
-                     validator: (val)=>val.isEmpty || val==password?'perhaps your password not matched or empty':null,
+                     validator: (val)=>val.isEmpty || val != password ? 'perhaps your password not matched or empty':null,
                     decoration: InputDecoration(
                         labelText: 'RETYPING YOUR PASSWORD',
                         labelStyle: TextStyle(
@@ -129,15 +134,20 @@ class _RegisterState extends State<Register> {
                       color: Colors.lightBlue,
                       elevation: 7.0,
                       child: (GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            if(_finalkey.currentState.validate()){
-                              Navigator.of(context).pop();
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => Accueil()));
-                            }
-                          });
-                        
+                        onTap: () async {
+                          if(_finalkey.currentState.validate()) {
+
+                            dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+
+                          }
+//                          setState(() {
+//                            if(_finalkey.currentState.validate()){
+//                              Navigator.of(context).pop();
+//                              Navigator.push(context,
+//                                  MaterialPageRoute(builder: (context) => Accueil()));
+//                            }
+//                          });
+//
                         },
                         child: Center(
                           child: (Text(
@@ -161,9 +171,7 @@ class _RegisterState extends State<Register> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.of(context).pop();
-                          Navigator.push(context,MaterialPageRoute(
-                              builder: (context)=>MyHomePage()));
+                          widget.toggleView();
                         },
                         child: Text('LogIn',
                             style: TextStyle(

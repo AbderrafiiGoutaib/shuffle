@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shuffle/services/auth.dart';
 import './MenuBar.dart';
 import './Quiz.dart';
 import './Camera.dart';
@@ -9,6 +10,8 @@ import './Camera.dart';
 class Accueil extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final Auth _auth = Auth();
+
     return Scaffold(
 //      drawer: Drawer(
 //        child: ListView(
@@ -72,6 +75,7 @@ class Accueil extends StatelessWidget {
                   //padding: EdgeInsets.fromLTRB(240, 200.0, 0.0, 0.0),
                   child: Text(
                     'MyApp',
+
                     style: TextStyle(
                       fontSize: 25.0,
                       fontWeight: FontWeight.bold,
@@ -85,11 +89,15 @@ class Accueil extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6.5),
                       image: DecorationImage(
-                          image: AssetImage('img/abderrafii.jpg'),
+                          image: AssetImage(''),
                           fit: BoxFit.cover
                       )
                   ),
                 ),
+                IconButton(
+                  icon: Icon(Icons.exit_to_app), onPressed: () async{
+                  await _auth.signOut();
+                },color: Colors.lightBlue,)
               ],
             ),
           ),

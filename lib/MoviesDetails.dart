@@ -100,9 +100,12 @@ class _MoviesDetailsState extends State<MoviesDetails> {
                       image: NetworkImage(img),
                       fit: BoxFit.contain
                   ),
-                  borderRadius: BorderRadius.only(topRight: Radius.circular(10.0),bottomRight: Radius.circular(10.0) )
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(10.0),bottomRight: Radius.circular(10.0) ),
+
               ),
+              child: Column(),
             ),
+
             SizedBox(width: 10.0,),
             Container(
 
